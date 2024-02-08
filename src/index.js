@@ -51,7 +51,7 @@ function App()
 {
     return (
         <div>
-            <h1>Hello React!</h1>
+            <Header />
             <Pizza />
         </div>
     );
@@ -67,6 +67,22 @@ function Pizza()
         </div>
 
     );
+}
+
+function Header() {
+    return (
+    <div>
+        <h1>Fast React Pizza Co.</h1>
+    </div>
+    
+);}
+
+function Menu() {
+
+}
+
+function Footer() {
+
 }
 
 const root =  ReactDOM.createRoot(document.getElementById("root"));

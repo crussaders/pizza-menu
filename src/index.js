@@ -108,16 +108,18 @@ function Menu() {
 
 );}
 
-function Pizza(props) 
+// destructuring props {pizzaObj}
+
+function Pizza({ pizzaObj }) 
 {
-    console.log(props);
+    
     return (
         <li className="pizza">
-            <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}/>
+            <img src={pizzaObj.photoName} alt={pizzaObj.name}/>
             <div>
-                <h3>{props.pizzaObj.name}</h3>
-                <p>{props.pizzaObj.ingredients}</p>
-                <span>{props.pizzaObj.price}</span>
+                <h3>{pizzaObj.name}</h3>
+                <p>{pizzaObj.ingredients}</p>
+                <span>{pizzaObj.price}</span>
             </div>
         </li>
 
@@ -144,10 +146,10 @@ function Footer() {
 
 // extracting jsx into a new component
 
-function Order(props) {
+function Order({closeHour}) {
     return(
     <div className="order">
-        <p>we're open until {props.closeHour}:00. Come visit us or order online.</p>
+        <p>we're open until {closeHour}:00. Come visit us or order online.</p>
         <button className="btn">Order</button>
     </div>
     );

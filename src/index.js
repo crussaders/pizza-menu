@@ -69,21 +69,30 @@ function Header() {
 );}
 
 function Menu() {
-    const hour = new Date().getHours();
-    const openHour = 12;
-    const closeHour = 22;
-    const isOpen = hour >= openHour && hour <= closeHour;
-    console.log(isOpen);
+    const pizzas = pizzaData;
+    // const pizzas = [];
+    const numPizzas = pizzas.length;
 
-    // if (hour >= openHour && hour <= closeHour)
-    //     alert("We are Open!");
-    // else    
-    //     alert("We are close");
 
     return(
         <main className="menu">
             <h2>Our Menu</h2>
-            <Pizza 
+            {/* conditional rendering with && */}
+            {/* {numPizzas > 0 &&  
+                (<ul className="pizzas">
+                {pizzas.map((pizza) => 
+                (<Pizza pizzaObj={pizza} key={pizza.name}/>))}
+            </ul>)} */}
+
+                    {/* conditional rendenring with ternaries */}
+
+                {numPizzas > 0 ? 
+                    (<ul className="pizzas">
+                    {pizzas.map((pizza) => 
+                    (<Pizza pizzaObj={pizza} key={pizza.name}/>))}
+                    </ul>) : 
+                    (<p>We're still working on our menu. Please comeback later :)</p>)}
+            {/* <Pizza 
                     name="Pizza Spinaci"
                     ingredients = 'Tomato, mozarella, spinach, and ricotta cheese'
                     photoName='pizzas/spinaci.jpg' 
@@ -93,7 +102,8 @@ function Menu() {
                     name="Pizza Funghi"
                     ingredients = 'Tomato, mozarella, mushrooms, and onion'
                     photoName='pizzas/funghi.jpg' 
-                    price={12} />
+                    price={12} /> */}
+
         </main>
 
 );}
@@ -102,30 +112,46 @@ function Pizza(props)
 {
     console.log(props);
     return (
-        <div className="pizza">
-            <img src={props.photoName} alt="pizza spinaci"/>
+        <li className="pizza">
+            <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}/>
             <div>
-                <h3>{props.name}</h3>
-                <p>{props.ingredients}</p>
-                <span>{props.price}</span>
+                <h3>{props.pizzaObj.name}</h3>
+                <p>{props.pizzaObj.ingredients}</p>
+                <span>{props.pizzaObj.price}</span>
             </div>
-        </div>
+        </li>
 
     );
 }
 
 function Footer() {
+    const hour = new Date().getHours();
+    const openHour = 12;
+    const closeHour = 22;
+    const isOpen = hour >= openHour && hour <= closeHour;
+    console.log(isOpen);
     return(
         <div>
             <footer className="footer">
-            {new Date().toLocaleTimeString()}. We are Currently Open!
+                {isOpen ? (
+                    <Order closeHour={closeHour}/>
+                ) : (<p>We are happy to welcome you between {openHour}:00 and {closeHour}:00 .</p>)}
             </footer>
         </div>
     );
 
 }
 
+// extracting jsx into a new component
 
+function Order(props) {
+    return(
+    <div className="order">
+        <p>we're open until {props.closeHour}:00. Come visit us or order online.</p>
+        <button className="btn">Order</button>
+    </div>
+    );
+}
 
 
 const root =  ReactDOM.createRoot(document.getElementById("root"));
